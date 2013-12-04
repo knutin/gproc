@@ -420,7 +420,7 @@ try_claim(K, Pid, F) ->
 	    try  Res = F(K, Pid),
 		 {true, Res}
 	    after
-		gproc:set_value(K, 0)
+	    [0] = gproc:update_counter(K, [{0, 0, 0}])
 	    end;
 	[1, 1] ->
 	    %% no
